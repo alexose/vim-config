@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/sourcemap/bootstrap/js/sourcemap/view'
+let g:netrw_dirhist_2='/home/sourcemap/convert/routes'
+let g:netrw_dirhist_3='/home/sourcemap/sourcemap-node/views'
+let g:netrw_dirhist_4='/home/sourcemap/webapp'
+let g:netrw_dirhist_5='/home/sourcemap/sourcemap-node/public'
+let g:netrw_dirhist_6='/home/sourcemap/sourcemap-node/views'
