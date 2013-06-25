@@ -8,6 +8,7 @@ set incsearch
 
 " Set standard setting for PEAR coding standards
 set tabstop=4
+set softtabstop=4
 set shiftwidth=4
 
 " Auto expand tabs to spaces
@@ -82,8 +83,3 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_follow_symlinks = 1
-
-let g:detectindent_preferred_expandtab = 1
-let g:detectindent_preferred_indent = 4
-
-autocmd BufRead * DetectIndent
