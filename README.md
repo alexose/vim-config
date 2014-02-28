@@ -1,15 +1,26 @@
 # My vim configuration
 
-It's nothing special, really.  But it does have some useful things: 
+It's nothing special, really.  But it does have some useful things:
 
-+ Syntax highlighting using Syntastic
 + CtrlP
-+ DetectIndent
-+ EasyAlign
-+ Multiple Cursors
-+ Random helper functions scattered throughout the .vimrc
++ LightLine
++ Syntax highlighting using Syntastic
++ EasyAlign (Enter in insert mode)
++ Multiple Cursors (Ctrl+n)
 
-To install:  
-git clone git@github.com:alexose/vim-config.git  
-mv vim-config .vim  
-ln -s .vim/.vimrc  
+As well as a few customizations:
+
++ Remove trailing whitespace automatically
++ Various random helper functions
+
+To install:
+
+    git clone git@github.com:alexose/vim-config.git
+    mv vim-config .vim
+    ln -s .vim/.vimrc
+    vim +BundleInstall +qall
+
+And, optionally:
+
+    #  JSHint for Syntactic.  Requires NPM
+    sudo npm -g jshint

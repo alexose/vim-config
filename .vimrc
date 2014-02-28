@@ -1,12 +1,23 @@
-" Syntax highlighting for Less
-au BufNewFile,BufRead *.less set filetype=less
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle, required
+Bundle 'gmarik/vundle'
+Bundle 'kien/ctrlp.vim'
+Bundle 'terryma/vim-multiple-cursors'
+Bundle 'scrooloose/syntastic'
+Bundle 'itchyny/lightline.vim'
+Bundle 'junegunn/vim-easy-align'
 
 set background=dark
 
 " Use incremental searching
 set incsearch
 
-" Set standard setting for PEAR coding standards
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -17,7 +28,6 @@ set expandtab
 " Auto indent after a {
 set autoindent
 set smartindent
-filetype indent plugin on
 
 " Linewidth to endless
 set textwidth=0
@@ -25,13 +35,11 @@ set textwidth=0
 " Do not wrap lines automatically
 set nowrap
 
-" Show line numbers by default
+" Set leader to space
+let mapleader=" "
 
 " Repair wired terminal/vim settings
 set backspace=start,eol
-
-" Map f12 to close window without saving 
-map <F12> :q!<CR>
 
 set ignorecase                 " caseinsensitive searches
 set showmode                   " always show command or insert mode
@@ -42,24 +50,45 @@ set whichwrap=b,s,<,>,[,]
 syntax on
 au BufNewFile,BufRead *.jstpl set filetype=html
 
-map <F7> mzgg=G`z<CR>
+" Space + p to toggle paste
+map <leader>p :set paste!<CR>
+
+" Disable ex mode
+map Q <nop>
+
+" Disable encryption on :X
+cnoreabbrev X x
+
+" Ctrl + W saves and closes current window
+map <c-w> :x<CR>
+
+" QQ closes all open windows without saving
+map QQ :qa!<CR>
 
 nmap <C-N> :tabnew <CR>
 nmap <C-T> :tabnext <CR>
 nmap <C-P> :tabprevious <CR>
 nmap <C-C> :tabclose <CR>
 
-":au BufWinEnter * let w:m1=matchadd('Search', '\%<101v.\%>97v', -1)
-":au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
-set pastetoggle=<F11>
 map <F9> :%s/['"]/\="'\""[submatch(0)!='"']/g
 
 nmap \fR :Mirror<CR>
 command! -bar -range Mirror <line1>,<line2>call setline('.', join(reverse(split(getline('.'), '\zs')), ''))
 
-call pathogen#infect()
-call pathogen#helptags()
+" Always remove trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//e
 
-" set runtimepath^=~/.vim/bundle/ctrlp.vim
-" let g:ctrlp_working_path_mode = 'ra'
-" let g:ctrlp_follow_symlinks = 1
+" Start interactive EasyAlign in visual mode
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign with a Vim movement
+nmap <Leader>a <Plug>(EasyAlign)
+
+" Configure LightLine
+set laststatus=2
+if !has('gui_running')
+    set t_Co=256
+endif
+let g:lightline = {
+\ 'colorscheme': 'wombat',
+\ }
