@@ -59,16 +59,21 @@ map Q <nop>
 " Disable encryption on :X
 cnoreabbrev X x
 
-" Ctrl + W saves and closes current window
-map <c-w> :x<CR>
+" Q saves and quits current window
+map Q :x<CR>
 
-" QQ closes all open windows without saving
-map QQ :qa!<CR>
+" Control + 1 closes all open windows without saving
+map <C-X> :qa!<CR>
 
 nmap <C-N> :tabnew <CR>
 nmap <C-T> :tabnext <CR>
 nmap <C-P> :tabprevious <CR>
 nmap <C-C> :tabclose <CR>
+
+nnoremap <silent> <C-Right> <c-w>l
+nnoremap <silent> <C-Left> <c-w>h
+nnoremap <silent> <C-Up> <c-w>k
+nnoremap <silent> <C-Down> <c-w>j
 
 map <F9> :%s/['"]/\="'\""[submatch(0)!='"']/g
 
