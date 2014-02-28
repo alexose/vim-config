@@ -5,6 +5,8 @@ It's nothing special, really.  But it does have some useful things:
 + Syntax highlighting using Syntastic
 + CtrlP
 + DetectIndent
++ EasyAlign
++ Multiple Cursors
 + Random helper functions scattered throughout the .vimrc
 
 To install:  
