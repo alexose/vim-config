@@ -12,6 +12,8 @@ Bundle 'terryma/vim-multiple-cursors'
 Bundle 'scrooloose/syntastic'
 Bundle 'itchyny/lightline.vim'
 Bundle 'junegunn/vim-easy-align'
+Bundle 'rking/ag.vim'
+Bundle 'mattboehm/vim-unstack'
 
 set background=dark
 
@@ -48,7 +50,7 @@ set showmatch                  " show matching brackets
 set formatoptions=tcqor
 set whichwrap=b,s,<,>,[,]
 syntax on
-au BufNewFile,BufRead *.jstpl set filetype=html
+au BufNewFile,BufRead *.ftl set filetype=html
 
 " Space + p to toggle paste
 map <leader>p :set paste!<CR>
@@ -97,3 +99,16 @@ endif
 let g:lightline = {
 \ 'colorscheme': 'wombat',
 \ }
+
+" Allow CTRLP to search within files
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlPLastMode'
+let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+filetype on
+filetype plugin on
+filetype indent on
