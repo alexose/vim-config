@@ -58,7 +58,7 @@ map Q :x<CR>
 set expandtab
 
 " Toggle between two and four spaces
-let g:spaces = 2
+let g:spaces = 4
 
 function! TabToggle()
   if g:spaces == 2
@@ -73,6 +73,7 @@ function! TabToggle()
 endfunction
 
 nmap <Leader>t :call TabToggle()<CR>
+silent call TabToggle()
 
 " Control + 1 closes all open windows without saving
 map <C-X> :qa!<CR>
