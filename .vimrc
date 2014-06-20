@@ -12,6 +12,7 @@ Bundle 'terryma/vim-multiple-cursors'
 Bundle 'scrooloose/syntastic'
 Bundle 'itchyny/lightline.vim'
 Bundle 'junegunn/vim-easy-align'
+Bundle 'ciaranm/detectindent'
 
 set background=dark
 
@@ -59,17 +60,29 @@ set expandtab
 
 " Toggle between two and four spaces
 let g:spaces = 4
-
 function! TabToggle()
   if g:spaces == 2
+    echo "Switching to " . g:spaces . " spaces."
+    let &tabstop     = g:spaces
+    let &shiftwidth  = g:spaces
+    let &softtabstop = g:spaces
+    set noexpandtab!
     let g:spaces = 4
+  elseif g:spaces == 4
+    echo "Switching to " . g:spaces . " spaces."
+    let &tabstop     = g:spaces
+    let &shiftwidth  = g:spaces
+    let &softtabstop = g:spaces
+    set noexpandtab!
+    let g:spaces = 0
   else
+    echo "Switching to tabs."
+    let &tabstop     = 4
+    let &shiftwidth  = 4
+    let &softtabstop = 4
     let g:spaces = 2
+    set noexpandtab
   endif
-  echo "Switching to " . g:spaces . " spaces."
-  let &tabstop     = g:spaces
-  let &shiftwidth  = g:spaces
-  let &softtabstop = g:spaces
 endfunction
 
 nmap <Leader>t :call TabToggle()<CR>
