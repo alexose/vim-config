@@ -12,18 +12,13 @@ Bundle 'terryma/vim-multiple-cursors'
 Bundle 'scrooloose/syntastic'
 Bundle 'itchyny/lightline.vim'
 Bundle 'junegunn/vim-easy-align'
+Bundle 'ciaranm/detectindent'
+Bundle 'pangloss/vim-javascript'
 
 set background=dark
 
 " Use incremental searching
 set incsearch
-
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-
-" Auto expand tabs to spaces
-set expandtab
 
 " Auto indent after a {
 set autoindent
@@ -48,10 +43,10 @@ set showmatch                  " show matching brackets
 set formatoptions=tcqor
 set whichwrap=b,s,<,>,[,]
 syntax on
-au BufNewFile,BufRead *.jstpl set filetype=html
+au BufNewFile,BufRead *.ftl set filetype=html
 
 " Space + p to toggle paste
-map <leader>p :set paste!<CR>
+map <Leader>p :set paste!<CR>
 
 " Disable ex mode
 map Q <nop>
@@ -61,6 +56,41 @@ cnoreabbrev X x
 
 " Q saves and quits current window
 map Q :x<CR>
+
+set expandtab
+
+" Toggle between two and four spaces
+let g:spaces = 4
+function! TabToggle()
+  if g:spaces == 2
+    echo "Switching to " . g:spaces . " spaces."
+    let &tabstop     = g:spaces
+    let &shiftwidth  = g:spaces
+    let &softtabstop = g:spaces
+    set noexpandtab!
+    let g:spaces = 4
+  elseif g:spaces == 4
+    echo "Switching to " . g:spaces . " spaces."
+    let &tabstop     = g:spaces
+    let &shiftwidth  = g:spaces
+    let &softtabstop = g:spaces
+    set noexpandtab!
+    let g:spaces = 0
+  else
+    echo "Switching to tabs."
+    let &tabstop     = 4
+    let &shiftwidth  = 4
+    let &softtabstop = 4
+    let g:spaces = 2
+    set noexpandtab
+  endif
+endfunction
+
+nmap <Leader>t :call TabToggle()<CR>
+
+let g:detectindent_preferred_expandtab = 1
+let g:detectindent_preferred_indent    = 4
+autocmd BufReadPost * :DetectIndent
 
 " Control + 1 closes all open windows without saving
 map <C-X> :qa!<CR>

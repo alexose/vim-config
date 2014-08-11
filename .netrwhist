@@ -1,3 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
-let g:netrw_dirhist_1='/home/sourcemap/bootstrap/js/sourcemap'
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/alexander/chshim/public/js/lib'
+let g:netrw_dirhist_2='/Users/alexander/chexagon2/chweb/src/main/java/com/crimsonhexagon/api/controller'
+let g:netrw_dirhist_3='/Users/alexander/chshim/public/js/views'
+let g:netrw_dirhist_4='/Users/alexander/chshim/public/js/models/monitor'
+let g:netrw_dirhist_5='/Users/alexander/research/.git'
+let g:netrw_dirhist_6='/Users/alexander/chshim/routes'
+let g:netrw_dirhist_7='/Users/alexander/sieve'
+let g:netrw_dirhist_8='/Users/alexander/chshim/routes'
