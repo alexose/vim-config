@@ -87,10 +87,7 @@ function! TabToggle()
 endfunction
 
 nmap <Leader>t :call TabToggle()<CR>
-
-let g:detectindent_preferred_expandtab = 1
-let g:detectindent_preferred_indent    = 4
-autocmd BufReadPost * :DetectIndent
+silent call TabToggle()
 
 " Control + 1 closes all open windows without saving
 map <C-X> :qa!<CR>

@@ -10,6 +10,7 @@ It's nothing special, really.  But it does have some useful things:
 
 As well as a few customizations:
 
++ The Silver Searcher backend to CtrlP
 + Remove trailing whitespace automatically
 + Various random helper functions
 
