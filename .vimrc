@@ -67,14 +67,14 @@ function! TabToggle()
     let &tabstop     = g:spaces
     let &shiftwidth  = g:spaces
     let &softtabstop = g:spaces
-    set noexpandtab!
+    set expandtab
     let g:spaces = 4
   elseif g:spaces == 4
     echo "Switching to " . g:spaces . " spaces."
     let &tabstop     = g:spaces
     let &shiftwidth  = g:spaces
     let &softtabstop = g:spaces
-    set noexpandtab!
+    set expandtab
     let g:spaces = 0
   else
     echo "Switching to tabs."
