@@ -1,0 +1,114 @@
+alias kexp="mpv http://live-aacplus-64.kexp.org/kexp64.aac"
+
+function sshcp { cat ~/.ssh/id_rsa.pub | ssh $1 'cat >> .ssh/authorized_keys' }
+
+# Prep SD card to be mounted in virtualbox
+function sd {
+  sudo umount /dev/disk$1*
+  sudo VBoxManage internalcommands createrawvmdk -filename ./sd-card$2.vmdk -rawdisk /dev/disk$1
+  sudo chmod 777 /dev/disk$1
+  sudo chmod 777 ./sd-card$2.vmdk
+  sudo umount /dev/disk$1*
+}
+
+# Git quick merge helpers
+function ad { git checkout --theirs $1 && git add $1 }
+function ao { git checkout --ours $1 && git add $1 }
+function cn { electron /Users/alexose/getvpn/getvpn.js $1 }
+function rc { electron /Users/alexose/getvpn/dcps/getlogin.js }
+function am { /Users/alexose/getvpn/dcps/automatic.sh }
+
+alias co="git rebase --continue"
+alias st="git status"
+alias pl="git pull --rebase"
+alias pu="git push -u origin HEAD"
+
+# Git pretty log
+alias gl="git log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short | less -R"
+# Git autocompletion
+# via https://github.com/git/git/tree/master/contrib/completion
+source ~/.git-completion.sh
+
+alias c1="echo -ne '\x55\x55\xaa\xaa\x00\x00\x00\x00\x00\x00\x00\x50' | netcat -w 600 192.168.86.236 8000 | mplayer -vo gl:backend=4:glfinish -fps 25 -demuxer h264es -"
+alias c2="echo -ne '\x55\x55\xaa\xaa\x00\x00\x00\x00\x00\x00\x00\x50' | netcat -w 600 192.168.88.141 8000 | mplayer -vo gl:backend=4:glfinish -fps 25 -demuxer h264es -"
+function cx(){ mplayer -vo gl:backend=4:glfinish -fps 25 -demuxer h264es $1 }
+function pf(){ peerflix -c 20 -x 24816 $1 --mpv }
+function pfm(){ peerflix -x 24816 $1 --mplayer }
+function e2e(){ npm --silent run test:e2e -- $1 | grep ✖ 2>/dev/null }
+
+alias vlc='/opt/homebrew-cask/Caskroom/vlc/2.2.1/VLC.app/Contents/MacOS/VLC'
+alias sc='~/Downloads/sc-4.3.15-osx/bin/sc -u alexose -k 556e95db-def2-435f-b802-8598f5ba7406'
+
+# Show listening ports
+alias ports='sudo lsof -iTCP -sTCP:LISTEN -n -P'
+
+alias cbs='node ~/get-cbs/index.js'
+alias recent='ls -Art | tail -n 1'
+
+function boom(){ pf "`ls -Artd -1 ~/Downloads/*.* | tail -n 1 | sed s/\'/"\\\'"/`"; }
+function seinfeld(){
+  echo $1 >> ~/seinfeld_watched &&
+  peerflix -i $1 "magnet:?xt=urn:btih:d0f120c1bbfb988eb35b648e1c78ca3e5d45ef39&dn=Seinfeld+Complete+Series-720p+WEBrip+EN-SUB+x264-%5BMULVAcoded%5D&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Fzer0day.ch%3A1337&tr=udp%3A%2F%2Fopen.demonii.com%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Fexodus.desync.com%3A6969" --mpv
+}
+function gg(){
+  echo $1 >> ~/gg_watched &&
+  peerflix -i $1 "magnet:?xt=urn:btih:079fb9e60123911617dcd08f04cf7c29f8180df9&dn=The+Golden+Girls%2C+Seasons+1+thru+7+Complete%2C+X264&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Fzer0day.ch%3A1337&tr=udp%3A%2F%2Fopen.demonii.com%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Fexodus.desync.com%3A6969" --mpv
+}
+alias record='bash ~/get-cbs/record_cbs.sh'
+function mosh() { /usr/local/bin/mosh $1 tmux attach }
+
+# Example: $ newsme 20170203
+function newsme(){
+  vlc "https://ia601509.us.archive.org/24/items/KPIX_$1_003000_CBS_Evening_News/KPIX_$1_003000_CBS_Evening_News.mp4?start=0&end=185&ignore=x.mp4" \
+      "https://ia601509.us.archive.org/24/items/KPIX_$1_003000_CBS_Evening_News/KPIX_$1_003000_CBS_Evening_News.mp4?start=185&end=370&ignore=x.mp4" \
+      "https://ia601509.us.archive.org/24/items/KPIX_$1_003000_CBS_Evening_News/KPIX_$1_003000_CBS_Evening_News.mp4?start=370&end=555&ignore=x.mp4" \
+      "https://ia601509.us.archive.org/24/items/KPIX_$1_003000_CBS_Evening_News/KPIX_$1_003000_CBS_Evening_News.mp4?start=555&end=740&ignore=x.mp4" \
+      "https://ia601509.us.archive.org/24/items/KPIX_$1_003000_CBS_Evening_News/KPIX_$1_003000_CBS_Evening_News.mp4?start=740&end=925&ignore=x.mp4" \
+      "https://ia601509.us.archive.org/24/items/KPIX_$1_003000_CBS_Evening_News/KPIX_$1_003000_CBS_Evening_News.mp4?start=925&end=1110&ignore=x.mp4" \
+      "https://ia601509.us.archive.org/24/items/KPIX_$1_003000_CBS_Evening_News/KPIX_$1_003000_CBS_Evening_News.mp4?start=1110&end=1295&ignore=x.mp4" \
+      "https://ia601509.us.archive.org/24/items/KPIX_$1_003000_CBS_Evening_News/KPIX_$1_003000_CBS_Evening_News.mp4?start=1295&end=1480&ignore=x.mp4" \
+      "https://ia601509.us.archive.org/24/items/KPIX_$1_003000_CBS_Evening_News/KPIX_$1_003000_CBS_Evening_News.mp4?start=1480&end=1665&ignore=x.mp4" \
+      "https://ia601509.us.archive.org/24/items/KPIX_$1_003000_CBS_Evening_News/KPIX_$1_003000_CBS_Evening_News.mp4?start=1665&end=1800&ignore=x.mp4"
+}
+
+function mornme(){
+  vlc "https://ia601509.us.archive.org/24/items/KPIX_$1_110000_CBS_Morning_News/KPIX_$1_110000_CBS_Morning_News.mp4?start=0&end=185&ignore=x.mp4" \
+      "https://ia601509.us.archive.org/24/items/KPIX_$1_110000_CBS_Morning_News/KPIX_$1_110000_CBS_Morning_News.mp4?start=185&end=370&ignore=x.mp4" \
+      "https://ia601509.us.archive.org/24/items/KPIX_$1_110000_CBS_Morning_News/KPIX_$1_110000_CBS_Morning_News.mp4?start=370&end=555&ignore=x.mp4" \
+      "https://ia601509.us.archive.org/24/items/KPIX_$1_110000_CBS_Morning_News/KPIX_$1_110000_CBS_Morning_News.mp4?start=555&end=740&ignore=x.mp4" \
+      "https://ia601509.us.archive.org/24/items/KPIX_$1_110000_CBS_Morning_News/KPIX_$1_110000_CBS_Morning_News.mp4?start=740&end=925&ignore=x.mp4" \
+      "https://ia601509.us.archive.org/24/items/KPIX_$1_110000_CBS_Morning_News/KPIX_$1_110000_CBS_Morning_News.mp4?start=925&end=1110&ignore=x.mp4" \
+      "https://ia601509.us.archive.org/24/items/KPIX_$1_110000_CBS_Morning_News/KPIX_$1_110000_CBS_Morning_News.mp4?start=1110&end=1295&ignore=x.mp4" \
+      "https://ia601509.us.archive.org/24/items/KPIX_$1_110000_CBS_Morning_News/KPIX_$1_110000_CBS_Morning_News.mp4?start=1295&end=1480&ignore=x.mp4" \
+      "https://ia601509.us.archive.org/24/items/KPIX_$1_110000_CBS_Morning_News/KPIX_$1_110000_CBS_Morning_News.mp4?start=1480&end=1665&ignore=x.mp4" \
+      "https://ia601509.us.archive.org/24/items/KPIX_$1_003000_CBS_Evening_News/KPIX_$1_003000_CBS_Evening_News.mp4?start=1665&end=1800&ignore=x.mp4"
+}
+
+alias pon='ssh -o "StrictHostKeyChecking no" pi@octopi "echo 4 > /sys/class/gpio/export; echo out > /sys/class/gpio/gpio4/direction; echo 0 > /sys/class/gpio/gpio4/value"'
+alias poff='ssh -o "StrictHostKeyChecking no" pi@octopi "echo 4 > /sys/class/gpio/export; echo out > /sys/class/gpio/gpio4/direction; echo 1 > /sys/class/gpio/gpio4/value"'
+
+alias score='git shortlog -s -n --all --no-merges'
+
+alias pozvibes="mplayer http://50.234.71.235:8090/stream-256.mp3?date=\`date -v -sat +%Y-%m-%d\`T17:00:00Z"
+alias pozvibes-last="mplayer http://50.234.71.235:8090/stream-256.mp3?date=\`date -v -sat -v -7d +%Y-%m-%d\`T17:00:00Z"
+alias pozvibes-half="mplayer http://50.234.71.235:8090/stream-256.mp3?date=\`date -v -sat +%Y-%m-%d\`T18:30:00Z"
+alias sonido="mplayer http://50.234.71.235:8090/stream-256.mp3?date=\`date -v -tue +%Y-%m-%d\`T02:00:00Z"
+alias sonido-last="mplayer http://50.234.71.235:8090/stream-256.mp3?date=\`date -v -tue -v -7d +%Y-%m-%d\`T02:00:00Z"
+alias sonido-half="mplayer http://50.234.71.235:8090/stream-256.mp3?date=\`date -v -tue +%Y-%m-%d\`T03:00:00Z"
+
+alias murder="kill -9 $(lsof -i tcp:3000 -t)"
+alias bt="sudo kextload -b com.apple.iokit.BroadcomBluetoothHostControllerUSBTransport"
+alias upyet="ssh -q admin@usg '/bin/ping -I eth2 8.8.8.8'"
+
+alias dc="docker-compose"
+alias rl="dc down && dc up"
+alias rb="dc down && dc build && dc up"
+alias rp="docker exec -it rails_api_1 pry-remote"
+alias dev="git checkout develop"
+function nb { git checkout -b $1 }
+alias dropdb="docker-compose run api rake db:drop && docker-compose run api rake db:create && docker-compose run api rake db:migrate && docker-compose run api rake db:seed"
+alias rf="git checkout improvement/generic-reducers"
+alias dyn="git checkout feature/tcd-1983-dynamic-header"
+function b { git checkout $1 }
+alias br="git branch --sort=-committerdate"
+
