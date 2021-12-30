@@ -14,6 +14,9 @@ Bundle 'itchyny/lightline.vim'
 Bundle 'junegunn/vim-easy-align'
 Bundle 'ciaranm/detectindent'
 Bundle 'pangloss/vim-javascript'
+Bundle 'posva/vim-vue'
+Bundle 'prettier/vim-prettier'
+Bundle 'sirtaj/vim-openscad'
 
 set background=dark
 
@@ -21,8 +24,8 @@ set background=dark
 set incsearch
 
 " Auto indent after a {
-set autoindent
-set smartindent
+" set autoindent
+" set smartindent
 
 " Linewidth to endless
 set textwidth=0
@@ -124,3 +127,17 @@ endif
 let g:lightline = {
 \ 'colorscheme': 'wombat',
 \ }
+
+set clipboard=unnamed
+
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = {'mode':'passive'}
+
+set noswapfile
+
+:set colorcolumn=120
+:hi ColorColumn ctermbg=black guibg=black
+
+let g:prettier#autoformat_config_present = 1
+let g:prettier#config#config_precedence = 'prefer-file'
