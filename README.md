@@ -16,7 +16,9 @@ As well as a few customizations:
 
 To install:
 
-    git clone git@github.com:alexose/vim-config.git
+    mv ~/.vim ~/.vim-old
+    mv ~/.vimrc ~/.vimrc-old
+    git clone https://github.com/alexose/vim-config.git
     git clone https://github.com/gmarik/Vundle.vim vim-config/bundle/vundle
     mv vim-config .vim
     ln -s .vim/.vimrc
